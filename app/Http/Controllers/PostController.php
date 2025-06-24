@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -13,7 +14,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = PostResource::collection(
+            Post::all()
+        );
+
+        return inertia('Posts/Index', [
+            'posts' => $posts,
+        ]);
     }
 
     /**
