@@ -14,6 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        // https://github.com/LaravelDaily/CRUDs-Laravel-React-Inertia   see code example
         $posts = PostResource::collection(
             Post::all()
         );

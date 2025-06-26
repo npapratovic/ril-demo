@@ -13,3 +13,8 @@ React Inertia Laravel 12 - RIL STACK demo app
 8) `php artisan key:generate`
 9) `php artisan migrate --seed`
 10) `composer run dev`
+
+#Tests 
+
+- see example: https://github.com/LaravelDaily/CRUDs-Laravel-API/blob/main/tests/Feature/TasksCRUDTest.php
+- - testing tips: https://github.com/OussamaMater/Laravel-Tips/blob/main/tips/testing.md
