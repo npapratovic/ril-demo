@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
@@ -15,12 +16,10 @@ class PostController extends Controller
     public function index()
     {
         // https://github.com/LaravelDaily/CRUDs-Laravel-React-Inertia   see code example
-        $posts = PostResource::collection(
-            Post::all()
-        );
 
+        $query = Post::query();
         return inertia('Posts/Index', [
-            'posts' => $posts,
+            'posts' => PostResource::collection($query->get()),
         ]);
     }
 
