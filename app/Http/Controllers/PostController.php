@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
@@ -18,8 +17,9 @@ class PostController extends Controller
         // https://github.com/LaravelDaily/CRUDs-Laravel-React-Inertia   see code example
 
         $query = Post::query();
+
         return inertia('Posts/Index', [
-            'posts' => PostResource::collection($query->get()),
+            'posts' => PostResource::collection($query->paginate(10)),
         ]);
     }
 
@@ -68,6 +68,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
 }

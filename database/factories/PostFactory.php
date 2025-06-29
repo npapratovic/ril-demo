@@ -17,7 +17,11 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(),
+            'content' => $this->faker->paragraph(),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'deleted_at' => null, // Soft delete field, can be null initially
         ];
     }
 }

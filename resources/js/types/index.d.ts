@@ -49,3 +49,23 @@ export interface Post {
     title: string;
     content: string;
 }
+
+export interface PaginatedResponse<T> {
+    // T is just a convention meaning “Type.” and  is a generic type placeholder.
+    // You could write PaginatedResponse<Item> or PaginatedResponse<Model> — it’s valid, but T is idiomatic and concise.
+    // This interface represents a paginated response structure.
+    data: T[]; // An array of items of type T
+    links: {
+        first: string | null;
+        last: string | null;
+        prev: string | null;
+        next: string | null;
+    };
+    meta: {
+        current_page: number;
+        last_page: number;
+        from: number;
+        to: number;
+        total: number;
+    };
+}
