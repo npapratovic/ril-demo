@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Posts/Create');
     }
 
     /**
@@ -36,15 +36,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
-    }
+        $post = Post::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -52,7 +46,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return inertia('Posts/Edit', [
+            'post' => new PostResource($post),
+        ]);
     }
 
     /**
@@ -60,7 +56,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->update($request->validated());
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success', 'Post updated successfully!');
     }
 
     /**
@@ -72,4 +72,5 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
+
 }
