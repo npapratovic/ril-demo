@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { Head, router } from '@inertiajs/react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-
+import { type BreadcrumbItem } from '@/types';
 import type { Post, PaginatedResponse } from '@/types';
 import PaginationButtons from '@/components/PaginationButtons';
 import { Button } from "@/components/ui/button"
@@ -10,6 +10,14 @@ import { toast } from "sonner"
 interface IndexPageProps {
     posts: PaginatedResponse<Post>; // This is the type for the posts prop, which is expected to be a paginated response containing Post objects
 }
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Posts',
+        href: '/posts',
+    },
+];
+
 // IndexPageProps is the type for the props passed to the Index component
 export default function Index({ posts }: IndexPageProps) {
     // This is the main component for the Posts Index page.
@@ -31,10 +39,8 @@ export default function Index({ posts }: IndexPageProps) {
     };
 
     return (
-        <AppLayout>
-            <Head title="Posts" />
+        <AppLayout breadcrumbs={breadcrumbs}>
             <div>
-                <h1 className="text-xl font-bold mb-4">Posts</h1>
                 <div className="mb-4">
                     <Button
                         variant="default"
